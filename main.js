@@ -36,7 +36,7 @@ function acheter_ticket(){
         str = prompt("Nom du passager : ");
     }
     let num = Number(prompt("Numéro du trajet : "));
-        while(num < 0 || num > 20){
+        while(num <= 0 || num > 20 || !Number.isInteger(num)){
             console.log("❌ Numéro de trajet invalide. Veuillez choisir un numéro entre 1 et 20.");
             num = Number(prompt("Numéro du trajet : "));
         }
@@ -81,6 +81,11 @@ function acheter_ticket(){
             console.log("╔══════════════════════════════════════╗");
             console.log("║       ✅ TICKET ACHETÉ AVEC SUCCÈS   ║");
             console.log("╚══════════════════════════════════════╝");
+            console.log(`🎫 Ticket #${tck.id}`);
+            console.log(`👤 Passager : ${tck.passengerName}`);
+            console.log(`🚆 Trajet   : ${trips[num -1].departure} → ${trips[num -1].destination}`);
+            console.log(`💺 Place    : ${tck.seatNumber}`);
+            console.log(`💰 Prix     : ${tck.price} DH`);
             while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
