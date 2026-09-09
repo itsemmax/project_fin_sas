@@ -104,7 +104,31 @@ function acheter_ticket(){
 
     }
 }
-
+function afficher_ticket(){
+    console.log("╔══════════════════════════════════════╗");
+    console.log("║               TICKETS                ║");
+    console.log("╚══════════════════════════════════════╝");
+    if(tickets.length == 0){
+        if (tickets.length === 0) {
+        console.log("❌ Aucun ticket enregistré.");
+        while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+            console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+            }
+    }
+    }
+    for (let i = 0; i < tickets.length; i++) {
+    let trip = trips.find(trips => trips.id === tickets[i].tripId);
+    console.log("");
+    console.log(`🎫 Ticket #${tickets[i].id}`);
+    console.log(`👤 Passager : ${tickets[i].passengerName}`);
+    console.log(`🚆 Trajet   : ${trip.departure} → ${trip.destination}`);
+    console.log(`💺 Place    : ${tickets[i].seatNumber}`);
+    console.log(`💰 Prix     : ${tickets[i].price} DH`);
+    }
+}
 
 function menu(){
         console.log("=================================");
@@ -127,7 +151,7 @@ function menu(){
             case 2:
                 return(acheter_ticket());
             case 3:
-                break;
+                return(afficher_ticket());
             case 4:
                 break;
             case 5:
