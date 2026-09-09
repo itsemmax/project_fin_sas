@@ -1,5 +1,6 @@
 const {trips,tickets} = require("./trips");
 const prompt = require("prompt-sync")();
+let counter =1;
 
 
 
@@ -24,6 +25,7 @@ function afficher_trajects(){
             return menu();
         console.log("❌ Choix invalide. Tapez 0 pour revenir.")
     }
+    let str = prompt()
 }
 
 function acheter_ticket(){
@@ -38,7 +40,7 @@ function acheter_ticket(){
             console.log("❌ Numéro de trajet invalide. Veuillez choisir un numéro entre 1 et 20.");
             num = Number(prompt("Numéro du trajet : "));
         }
-        if(trips[num -1])
+        if(trips[num -1].availableSeats > 0){
         console.log(`  #${trips[num - 1].id}  ${trips[num - 1].departure} → ${trips[num -1].destination}`);
         console.log("  ─────────────────────────────────────────");
         console.log(`  🕐 Départ        : ${trips[num -1].departureTime}`);
@@ -46,6 +48,55 @@ function acheter_ticket(){
         console.log(`  💰 Prix          : ${trips[num-1].price} DH`);
         console.log(`  💺 Places        : ${trips[num-1].availableSeats}`);
         console.log("                                           ");
+        }
+        else{
+            console.log("╔══════════════════════════════════════╗");
+            console.log("║             TRAIN COMPLET            ║");
+            console.log("╚══════════════════════════════════════╝");
+            console.log("                                        ");
+            console.log("❌ Désolé, ce trajet est complet. Aucune place disponible.");
+            while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+            continue;
+            }
+        }
+        console.log("Êtes-vous sûr de vouloir acheter ce ticket ?");
+        console.log("1. Confirmer l'achat");
+        console.log("0. Retour au menu principal");
+        let b =Number(prompt("Entrez votre choix : "));
+        if(b == 0)
+            return menu();
+        else if(b ==1){
+            let tck = {
+                id : counter++,
+                passengerName: str,
+                tripId: num,
+                seatNumber: (50 - trips[num - 1].availableSeats) + 1,
+                price: trips[num -1].price
+            }
+            trips[num - 1].availableSeats--;
+            tickets.push(tck);
+            console.log("╔══════════════════════════════════════╗");
+            console.log("║       ✅ TICKET ACHETÉ AVEC SUCCÈS   ║");
+            console.log("╚══════════════════════════════════════╝");
+            while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+            console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+            }
+        }
+        else{
+            while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+            console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+            }
+        }
+
     }
 }
 
