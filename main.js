@@ -1,6 +1,7 @@
 const {trips,tickets} = require("./trips");
 const prompt = require("prompt-sync")();
 let counter =1;
+let arr_removed_id = [];
 
 
 
@@ -128,6 +129,54 @@ function afficher_ticket(){
     console.log(`💺 Place    : ${tickets[i].seatNumber}`);
     console.log(`💰 Prix     : ${tickets[i].price} DH`);
     }
+    while(1){
+        let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+        if(c == 0)
+            return menu();
+        console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+        }
+}
+function annuler_ticket(){
+    while(1){
+        console.log("╔══════════════════════════════════════╗");
+        console.log("║          ANNULER UN TICKET           ║");
+        console.log("╚══════════════════════════════════════╝");
+        let n = Number(prompt("Identifiant du ticket :"));
+        if (tickets.length === 0 || n <= 0) {
+            console.log("❌ Aucun ticket enregistré.");
+        while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+            console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+            }
+        }
+        for(let i =0;i < tickets.length;i++){
+            if(n == tickets[i].id){
+                arr_removed_id.push(i + 1);
+                tickets.splice(i,1);
+                console.log("╔══════════════════════════════════════╗");
+                console.log("║      ✅ TICKET ANNULÉ AVEC SUCCÈS    ║");
+                console.log("╚══════════════════════════════════════╝");
+                console.log("Ticket annulé avec succès.");
+                while(1){
+                let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+                if(c == 0)
+                    return menu();
+                console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+                }
+            }
+            else{
+                console.log("❌ Aucun ticket enregistré.");
+                while(1){
+                let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+                if(c == 0)
+                    return menu();
+                console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+                }
+            }
+        }
+    }
 }
 
 function menu(){
@@ -153,6 +202,7 @@ function menu(){
             case 3:
                 return(afficher_ticket());
             case 4:
+                return(annuler_ticket());
                 break;
             case 5:
                 break;
