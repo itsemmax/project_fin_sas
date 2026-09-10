@@ -152,7 +152,7 @@ function annuler_ticket(){
             }
         }
         for(let i =0;i < tickets.length;i++){
-            if(n == tickets[i].id){
+            if(n === tickets[i].id){
                 arr_removed_id.push(i + 1);
                 tickets.splice(i,1);
                 console.log("╔══════════════════════════════════════╗");
@@ -161,20 +161,17 @@ function annuler_ticket(){
                 console.log("Ticket annulé avec succès.");
                 while(1){
                 let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-                if(c == 0)
+                if(c === 0)
                     return menu();
-                console.log("❌ Choix invalide. Tapez 0 pour revenir.")
                 }
             }
-            else{
-                console.log("❌ Aucun ticket enregistré.");
-                while(1){
-                let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-                if(c == 0)
-                    return menu();
-                console.log("❌ Choix invalide. Tapez 0 pour revenir.")
-                }
-            }
+        }
+        console.log("❌ Aucun ticket enregistré.");
+        while(1){
+        let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+        if(c == 0)
+            console.log("❌ Choix invalide. Tapez 0 pour revenir.")
+            return menu();
         }
     }
 }
@@ -203,8 +200,8 @@ function menu(){
                 return(afficher_ticket());
             case 4:
                 return(annuler_ticket());
-                break;
             case 5:
+
                 break;
             case 6:
                 break;
@@ -220,5 +217,4 @@ function menu(){
 }
 }
 menu();
-
 
