@@ -231,6 +231,30 @@ function filter_trajet(){
        }
     }
 }
+function trier_trajet(){
+    while(1){
+        for(let i = 0;i < trips.length;i++){
+            for(let j =0;j < trips.length - i -1;j++){
+                if(trips[j].price > trips[j+1].price){
+                    let temp = trips[j].price;
+                    trips[j].price = trips[j + 1].price;
+                    trips[j + 1].price = temp;
+                    sorted = true;
+                }
+            }
+        }
+        for(let i =0;i< trips.length;i++){
+                console.log(`${trips[i].departure} → ${trips[i].destination} : ${trips[i].price} DH`);
+        }
+        while(1){
+            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+            if(c == 0)
+                return menu();
+        console.log("Choix invalide. Tapez 0 pour revenir.")
+        }
+        
+    }
+}
 function menu(){
         console.log("=================================");
         console.log("        RAILWAY MANAGER          ");
@@ -260,7 +284,7 @@ function menu(){
             case 6:
                 return(filter_trajet());
             case 7:
-                //return(trier_trajet());
+                return(trier_trajet());
             case 0:
                 console.log("Au revoir!");
                 return;
