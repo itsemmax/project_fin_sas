@@ -4,7 +4,6 @@ let counter =1;
 let arr_removed_id = [];
 
 
-
 function afficher_trajects(){
     console.log("╔══════════════════════════════════════════╗");
     console.log("║           TRAJETS DISPONIBLES            ║");
@@ -24,12 +23,11 @@ function afficher_trajects(){
     let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0)
             return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.");
     }
 }
 
 function acheter_ticket(){
-    while(1){
     let str = prompt("Nom du passager :");
     while(str === ""){
         console.log("Nom invalide, veuillez réessayer.");
@@ -59,7 +57,7 @@ function acheter_ticket(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.");
+            console.log("Choix invalide.");
             }
         }
         console.log("Êtes-vous sûr de vouloir acheter ce ticket ?");
@@ -97,7 +95,7 @@ function acheter_ticket(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.")
+            console.log("Choix invalide.")
             }
         }
         else{
@@ -105,11 +103,10 @@ function acheter_ticket(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.")
+            console.log("Choix invalide.")
             }
         }
 
-    }
 }
 function afficher_ticket(){
     console.log("╔══════════════════════════════════════╗");
@@ -121,7 +118,7 @@ function afficher_ticket(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.")
+            console.log("Choix invalide.")
         }
     }
     for (let i = 0; i < tickets.length; i++) {
@@ -137,7 +134,7 @@ function afficher_ticket(){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0)
             return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.")
         }
 }
 function annuler_ticket(){
@@ -151,7 +148,7 @@ function annuler_ticket(){
                 let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
                 if(c == 0)
                     return menu();
-                console.log("Choix invalide. Tapez 0 pour revenir.")
+                console.log("Choix invalide.")
             }
         }
         let n = Number(prompt("Identifiant du ticket :"));
@@ -175,7 +172,7 @@ function annuler_ticket(){
         while(1){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0) return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.");
+        console.log("Choix invalide.");
         }
     }
 }
@@ -202,7 +199,7 @@ function rechercher_ticket(){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0)
             return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.")
         }
 }
 function filter_trajet(){
@@ -224,7 +221,7 @@ function filter_trajet(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.")
         }
 }
 function trier_trajet(){
@@ -244,7 +241,7 @@ function trier_trajet(){
         while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0) return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.")
+            console.log("Choix invalide.")
         }        
 }
 function nombre_total_tickets(){
@@ -256,7 +253,7 @@ function nombre_total_tickets(){
     while(1){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0) return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.")
     } 
 }
 function chiffre_total(){
@@ -268,7 +265,7 @@ function chiffre_total(){
     while(1){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0) return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
+        console.log("Choix invalide.")
     }
 }
 function menu(){
@@ -283,11 +280,11 @@ function menu(){
         console.log("6. Filtrer les trajets");
         console.log("7. Trier les trajets");
         console.log("8. Nombres total de tickets vendus");
-        console.log("9. Chiffre d'affaires total")
+        console.log("9. Chiffre d'affaires total");
         console.log("0. Quitter");
 
         while(1){
-        let x = Number(prompt("Entrez votre choix (0-7) :"));
+        let x = Number(prompt("Entrez votre choix (0-10) :"));
         switch (x){
             case 1:
                 return(afficher_trajects());
@@ -311,7 +308,7 @@ function menu(){
                 console.log("Au revoir!");
                 return;
             default:
-                console.log("Choix invalide. Veuillez choisir un nombre entre 0 et 8.");
+                console.log("Choix invalide.");
                 break;
         }
 }
