@@ -259,6 +259,18 @@ function nombre_total_tickets(){
         console.log("Choix invalide. Tapez 0 pour revenir.")
     } 
 }
+function chiffre_total(){
+    let total = 0;
+    for(let i =0;i<tickets.length;i++){
+        total += tickets[i].price;
+    }
+    console.log(`Chiffre d'affaires total : ${total} DH`);
+    while(1){
+        let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+        if(c == 0) return menu();
+        console.log("Choix invalide. Tapez 0 pour revenir.")
+    }
+}
 function menu(){
         console.log("=================================");
         console.log("        RAILWAY MANAGER          ");
@@ -270,7 +282,8 @@ function menu(){
         console.log("5. Rechercher un ticket");
         console.log("6. Filtrer les trajets");
         console.log("7. Trier les trajets");
-        console.log("8.nombres total de tickets vendus: ")
+        console.log("8. Nombres total de tickets vendus");
+        console.log("9. Chiffre d'affaires total")
         console.log("0. Quitter");
 
         while(1){
@@ -292,6 +305,8 @@ function menu(){
                 return(trier_trajet());
             case 8:
                 return(nombre_total_tickets());
+            case 9:
+                return(chiffre_total());
             case 0:
                 console.log("Au revoir!");
                 return;
