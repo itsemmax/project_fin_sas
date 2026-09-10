@@ -26,7 +26,6 @@ function afficher_trajects(){
             return menu();
         console.log("Choix invalide. Tapez 0 pour revenir.")
     }
-    let str = prompt()
 }
 
 function acheter_ticket(){
@@ -37,7 +36,7 @@ function acheter_ticket(){
         str = prompt("Nom du passager : ");
     }
     let num = Number(prompt("Numéro du trajet : "));
-        while(num <= 0 || num > 20 || !Number.isInteger(num)){
+        while(num <= 0 || num > trips.length || !Number.isInteger(num)){
             console.log("Numéro de trajet invalide. Veuillez choisir un numéro entre 1 et 20.");
             num = Number(prompt("Numéro du trajet : "));
         }
@@ -60,7 +59,7 @@ function acheter_ticket(){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
-            continue;
+            console.log("Choix invalide. Tapez 0 pour revenir.");
             }
         }
         console.log("Êtes-vous sûr de vouloir acheter ce ticket ?");
@@ -70,12 +69,19 @@ function acheter_ticket(){
         if(b == 0)
             return menu();
         else if(b ==1){
-            let tck = {
+            let tck= {
                 id : counter++,
                 passengerName: str,
                 tripId: num,
-                seatNumber: (50 - trips[num - 1].availableSeats) + 1,
                 price: trips[num -1].price
+            }
+            let deleted_tck = arr_removed_id.find(ticket => ticket.tripId === num);
+            if(deleted_tck){
+                tck.seatNumber= deleted_tck.seatNumber;
+                let index = arr_removed_id.indexOf(deleted_tck);
+                arr_removed_id.splice(index, 1);
+            }else {
+                tck.seatNumber =  (50 - trips[num - 1].availableSeats) + 1;
             }
             trips[num - 1].availableSeats--;
             tickets.push(tck);
@@ -110,15 +116,13 @@ function afficher_ticket(){
     console.log("║               TICKETS                ║");
     console.log("╚══════════════════════════════════════╝");
     if(tickets.length == 0){
-        if (tickets.length === 0) {
         console.log("Aucun ticket enregistré.");
         while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
             if(c == 0)
                 return menu();
             console.log("Choix invalide. Tapez 0 pour revenir.")
-            }
-    }
+        }
     }
     for (let i = 0; i < tickets.length; i++) {
     let trip = trips.find(trips => trips.id === tickets[i].tripId);
@@ -141,19 +145,20 @@ function annuler_ticket(){
         console.log("╔══════════════════════════════════════╗");
         console.log("║          ANNULER UN TICKET           ║");
         console.log("╚══════════════════════════════════════╝");
-        let n = Number(prompt("Identifiant du ticket :"));
-        if (tickets.length === 0 || n <= 0) {
+        if (tickets.length === 0){
             console.log("Aucun ticket enregistré.");
-        while(1){
-            let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-            if(c == 0)
-                return menu();
-            console.log("Choix invalide. Tapez 0 pour revenir.")
+            while(1){
+                let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+                if(c == 0)
+                    return menu();
+                console.log("Choix invalide. Tapez 0 pour revenir.")
             }
         }
+        let n = Number(prompt("Identifiant du ticket :"));
         for(let i =0;i < tickets.length;i++){
             if(n === tickets[i].id){
-                arr_removed_id.push(i + 1);
+                arr_removed_id.push(tickets[i]);
+                trips[tickets[i].tripId - 1].availableSeats++;
                 tickets.splice(i,1);
                 console.log("╔══════════════════════════════════════╗");
                 console.log("║        TICKET ANNULÉ AVEC SUCCÈS     ║");
@@ -166,59 +171,54 @@ function annuler_ticket(){
                 }
             }
         }
-        console.log("Aucun ticket enregistré.");
+        console.log("Ticket introuvable.");
         while(1){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-        if(c == 0)
-            console.log("Choix invalide. Tapez 0 pour revenir.")
-            return menu();
+        if(c == 0) return menu();
+        console.log("Choix invalide. Tapez 0 pour revenir.");
         }
     }
 }
 function rechercher_ticket(){
-    while(1){
         console.log("╔══════════════════════════════════════╗");
         console.log("║          RECHERCHER UN TICKET        ║");
         console.log("╚══════════════════════════════════════╝");
         let str = prompt("Nom du passager :");
-        
+        let n =0;
         for(let i =0;i< tickets.length;i++){
             if(str.toLowerCase() === tickets[i].passengerName.toLowerCase()){
                 console.log("");
                 console.log(`Ticket #${tickets[i].id}`);
                 console.log(`Passager : ${tickets[i].passengerName}`);
-                console.log(`Trajet   : ${tickets[i].departure} → ${tickets[i].destination}`);
+                console.log(`Trajet   : ${trips[tickets[i].tripId - 1].departure} → ${trips[tickets[i].tripId - 1].destination}`);
                 console.log(`Place    : ${tickets[i].seatNumber}`);
                 console.log(`Prix     : ${tickets[i].price} DH`);
-                while(1){
-                let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-                if(c == 0)
-                    return menu();
-                console.log("Choix invalide. Tapez 0 pour revenir.")
-                }
+                n++;
             }
         }
-        console.log("❌ Aucun ticket trouvé pour ce passager.");
+        if(n == 0)
+            console.log("Aucun ticket trouvé pour ce passager.");
         while(1){
         let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
         if(c == 0)
             return menu();
         console.log("Choix invalide. Tapez 0 pour revenir.")
         }
-    }
 }
 function filter_trajet(){
-    while(1){
         console.log("╔══════════════════════════════════════╗");
         console.log("║          FILTRER LES TRAJETS         ║");
         console.log("╚══════════════════════════════════════╝");
         let str = prompt("Ville de départ :")
-        let c = 0;
+        let d = 0;
         for(let i =0;i< trips.length;i++){
             if(str.toLowerCase() === trips[i].departure.toLowerCase()){
                 console.log(`${trips[i].departure} → ${trips[i].destination} : ${trips[i].price} DH`)
-                c++;
+                d++;
             }
+        }
+        if(d == 0){
+            console.log("❌ Aucun trajet trouvé pour cette ville.");
         }
         while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
@@ -226,34 +226,26 @@ function filter_trajet(){
                 return menu();
         console.log("Choix invalide. Tapez 0 pour revenir.")
         }
-        if(c == 0){
-            console.log("❌ Aucun trajet trouvé pour cette ville.");
-       }
-    }
 }
 function trier_trajet(){
-    while(1){
+    let arr = [...trips];
         for(let i = 0;i < trips.length;i++){
             for(let j =0;j < trips.length - i -1;j++){
-                if(trips[j].price > trips[j+1].price){
-                    let temp = trips[j].price;
-                    trips[j].price = trips[j + 1].price;
-                    trips[j + 1].price = temp;
-                    sorted = true;
+                if(arr[j].price > arr[j+1].price){
+                    let temp = arr[j];
+                    arr[j]= arr[j + 1];
+                    arr[j + 1]= temp;
                 }
             }
         }
         for(let i =0;i< trips.length;i++){
-                console.log(`${trips[i].departure} → ${trips[i].destination} : ${trips[i].price} DH`);
+                console.log(`${arr[i].departure} → ${arr[i].destination} : ${arr[i].price} DH`);
         }
         while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
-            if(c == 0)
-                return menu();
-        console.log("Choix invalide. Tapez 0 pour revenir.")
-        }
-        
-    }
+            if(c == 0) return menu();
+            console.log("Choix invalide. Tapez 0 pour revenir.")
+        }        
 }
 function menu(){
         console.log("=================================");
@@ -295,4 +287,3 @@ function menu(){
 }
 }
 menu();
-
