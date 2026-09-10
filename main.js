@@ -218,7 +218,7 @@ function filter_trajet(){
             }
         }
         if(d == 0){
-            console.log("❌ Aucun trajet trouvé pour cette ville.");
+            console.log("Aucun trajet trouvé pour cette ville.");
         }
         while(1){
             let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
@@ -247,6 +247,18 @@ function trier_trajet(){
             console.log("Choix invalide. Tapez 0 pour revenir.")
         }        
 }
+function nombre_total_tickets(){
+    let i =0;
+    while(i < tickets.length){
+        i++;
+    }
+    console.log(`Nombre total de tickets : ${i}`);
+    while(1){
+        let c = Number(prompt("Tapez 0 pour revenir au menu principal :"));
+        if(c == 0) return menu();
+        console.log("Choix invalide. Tapez 0 pour revenir.")
+    } 
+}
 function menu(){
         console.log("=================================");
         console.log("        RAILWAY MANAGER          ");
@@ -258,6 +270,7 @@ function menu(){
         console.log("5. Rechercher un ticket");
         console.log("6. Filtrer les trajets");
         console.log("7. Trier les trajets");
+        console.log("8.nombres total de tickets vendus: ")
         console.log("0. Quitter");
 
         while(1){
@@ -277,11 +290,13 @@ function menu(){
                 return(filter_trajet());
             case 7:
                 return(trier_trajet());
+            case 8:
+                return(nombre_total_tickets());
             case 0:
                 console.log("Au revoir!");
                 return;
             default:
-                console.log("Choix invalide. Veuillez choisir un nombre entre 0 et 7.");
+                console.log("Choix invalide. Veuillez choisir un nombre entre 0 et 8.");
                 break;
         }
 }
